@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>VOD配信・Live配信の裏側</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/theme/white.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css"
+    />
+    <style>
+      .reveal {
+        background-color: #ffffff;
+      }
+      .reveal .slides section {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #ffffff;
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        text-align: left;
+        color: #6e5a40;
+        margin: 30px 0 20px 0;
+        font-size: 1.2em;
+        flex-shrink: 0;
+      }
+      .reveal h1 {
+        font-size: 1.5em;
+      }
+      .reveal h3 {
+        font-size: 1em;
+      }
+      .reveal .title-slide {
+        text-align: center;
+        justify-content: center;
+      }
+      .reveal .title-slide h1,
+      .reveal .title-slide h2,
+      .reveal .title-slide h3 {
+        text-align: center;
+      }
+
+      .reveal ul {
+        padding: 0px;
+        margin: 0px;
+      }
+
+      .reveal ul,
+      .reveal ol,
+      .reveal p {
+        font-size: 0.7em;
+        flex-grow: 1;
+        color: #333333;
+      }
+      .reveal li {
+        color: #333333;
+      }
+      .reveal .slides section > * {
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- タイトルスライド -->
+        <section class="title-slide">
+          <h1>VOD配信・Live配信の裏側</h1>
+          <p>ストリーミング技術の基礎</p>
+        </section>
+
+        <!-- 概要 -->
+        <section>
+          <h2>今日のトピック</h2>
+          <ul>
+            <li>VOD配信とは</li>
+            <li>Live配信とは</li>
+            <li>内部で使用されているプロトコル</li>
+            <li>Http Live Streaming (HLS)</li>
+          </ul>
+        </section>
+
+        <!-- VOD配信 -->
+        <section>
+          <h2>VOD配信</h2>
+          <ul>
+            <li>事前に録画された動画コンテンツ</li>
+            <li>ユーザーが好きな時に視聴可能</li>
+            <li>一時停止、早送り、巻き戻しが可能</li>
+            <li>Netflix、YouTube、Amazon Prime Videoなど</li>
+          </ul>
+          <pre><code class="javascript" data-line-numbers="1-5|2|3|4,5">
+// VOD配信の基本的な再生コード例
+const video = document.querySelector('video');
+video.src = 'https://example.com/video.mp4';
+video.load();
+video.play();
+          </code></pre>
+        </section>
+
+        <!-- Live配信 -->
+        <section>
+          <h2>Live配信</h2>
+          <ul>
+            <li>リアルタイムで配信される動画</li>
+            <li>生放送、ライブストリーミング</li>
+            <li>低遅延が重要</li>
+            <li>Twitch、YouTube Live、ニコニコ生放送など</li>
+          </ul>
+        </section>
+
+        <!-- プロトコル -->
+        <section>
+          <h2>内部で使用されているプロトコル</h2>
+          <ul>
+            <li><strong>HLS (HTTP Live Streaming)</strong></li>
+            <li>DASH (Dynamic Adaptive Streaming over HTTP)</li>
+            <li>RTMP (Real-Time Messaging Protocol)</li>
+            <li>WebRTC (Web Real-Time Communication)</li>
+          </ul>
+        </section>
+
+        <!-- HLS詳細 -->
+        <section>
+          <h2>HTTP Live Streaming (HLS)</h2>
+        </section>
+
+        <!-- HLS特徴 -->
+        <section>
+          <h3>HLSの特徴</h3>
+          <ul>
+            <li>HTTPベースのプロトコル</li>
+            <li>動画を小さなセグメントに分割</li>
+            <li>プレイリスト（.m3u8）で管理</li>
+            <li>アダプティブビットレート対応</li>
+            <li>CDNとの相性が良い</li>
+          </ul>
+        </section>
+
+        <!-- HLS仕組み -->
+        <section>
+          <h3>HLSの仕組み</h3>
+          <ol>
+            <li>動画を小さなセグメント（.ts）に分割</li>
+            <li>プレイリストファイル（.m3u8）を作成</li>
+            <li>クライアントがプレイリストを取得</li>
+            <li>セグメントを順次ダウンロード・再生</li>
+            <li>ネットワーク状況に応じて品質を調整</li>
+          </ol>
+        </section>
+
+        <!-- まとめ -->
+        <section>
+          <h2>まとめ</h2>
+          <ul>
+            <li>VOD：録画済みコンテンツの配信</li>
+            <li>Live：リアルタイム配信</li>
+            <li>HLS：HTTPベースの効率的な配信技術</li>
+            <li>セグメント化により柔軟な品質調整が可能</li>
+          </ul>
+        </section>
+
+        <!-- ありがとうございました -->
+        <section class="title-slide">
+          <h1>ありがとうございました</h1>
+          <p>質問はありますか？</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        transition: "slide",
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
