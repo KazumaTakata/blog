@@ -340,6 +340,60 @@ video.play();
           </code></pre>
         </section>
 
+        <!-- DRM explanation -->
+        <section>
+          <h3>DRM (Digital Rights Management)</h3>
+          <ul>
+            <li><strong>デジタル著作権管理</strong>技術</li>
+            <li>コンテンツの不正ダウンロード・複製を防ぐ</li>
+            <li>動画データを暗号化して保護</li>
+            <li>ライセンスサーバーでアクセス制御</li>
+          </ul>
+
+          <h3>主要なDRM方式</h3>
+          <ul>
+            <li>
+              <strong>Widevine</strong> - Google開発（Chrome、Android, Edge）
+            </li>
+            <li><strong>FairPlay</strong> - Apple開発（Safari、iOS）</li>
+          </ul>
+
+          <h3>サイト例</h3>
+          <p>アマプラビデオ</p>
+          <p>U-NEXT</p>
+        </section>
+
+        <section>
+          <h3>HLSを用いたlive配信</h3>
+          <pre class="mermaid">
+            sequenceDiagram
+                participant Browser as ブラウザ
+                participant MediaPackage as AWS MediaPackage<br/>(パッケージング・配信)
+                participant MediaLive as AWS MediaLive<br/>(エンコード処理)
+                participant Source as 配信元
+
+                Source->>MediaLive: RTMP/SRT ライブストリーム
+                MediaLive->>MediaLive: 動画エンコード・トランスコード
+                MediaLive->>MediaPackage: エンコード済みストリーム
+                MediaPackage->>MediaPackage: HLSセグメント化・マニフェスト生成
+                
+                loop 定期的なマニフェストチェック
+                    Browser->>MediaPackage: GET /playlist.m3u8
+                    MediaPackage-->>Browser: Just-in-Time生成マニフェスト
+                    Note over Browser: 新しいセグメントを発見
+                    Browser->>MediaPackage: GET /segment001.ts
+                    MediaPackage-->>Browser: HLSセグメント
+                    Browser->>Browser: セグメント再生
+                end
+                
+                Note over MediaPackage: リアルタイムでマニフェスト更新
+          </pre>
+        </section>
+
+        <section>
+          <h3>超低遅延HLS配信</h3>
+        </section>
+
         <!-- まとめ -->
         <section>
           <h2>まとめ</h2>
