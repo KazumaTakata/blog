@@ -86,6 +86,9 @@
         padding-left: 2rem;
         font-size: 0.8em;
       }
+      .accent-color {
+        color: #e55050 !important;
+      }
     </style>
   </head>
   <body>
@@ -172,7 +175,7 @@ video.play();
             <div class="column">
               <video width="100%" height="300" controls>
                 <source
-                  src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/199596-910653729_small.mp4"
+                  src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/loop-100-video.mp4"
                   type="video/mp4"
                 />
                 お使いのブラウザは動画タグをサポートしていません。
@@ -197,22 +200,31 @@ video.play();
         <!-- データフロー図 -->
         <section>
           <h2>ブラウザがS3から動画を取得する流れ</h2>
-          <div class="mermaid">
-            sequenceDiagram participant User as ユーザー participant Browser as
-            ブラウザ participant S3 as Amazon S3 User->>Browser:
-            動画再生ボタンクリック Browser->>S3: HTTP GET request<br />/bucket/video.mp4
-            S3-->>Browser: HTTP 200 OK<br />Content-Type: video/mp4<br />動画データ
-            Browser->>Browser: 動画デコード Browser->>User: 動画再生開始
-          </div>
+          <pre class="mermaid">
+            sequenceDiagram
+                participant User as ユーザー
+                participant Browser as ブラウザ
+                participant S3 as Amazon S3
+                
+                User->>Browser: 動画再生ボタンクリック
+                Browser->>S3: HTTP GET request<br/>/bucket/video.mp4
+                S3-->>Browser: HTTP 200 OK<br/>Content-Type: video/mp4<br/>動画データ
+                Browser->>Browser: 動画デコード
+                Browser->>User: 動画再生開始
+          </pre>
         </section>
 
         <!-- 動画デモ -->
         <section>
           <h2>動画配信デモ</h2>
           <p>なんでクソでかい動画でもすぐに再生できるの？？</p>
+          <p class="fragment accent-color">
+            A. Http HeaderのRange,
+            Content-Rangeとプログレッシブダウンロードを利用しているから
+          </p>
           <video width="800" height="450" controls>
             <source
-              src="video/mp4/199596-910653729_small.mp4"
+              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/loop-100-video.mp4"
               type="video/mp4"
             />
             お使いのブラウザは動画タグをサポートしていません。
