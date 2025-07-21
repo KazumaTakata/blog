@@ -207,8 +207,8 @@ video.play();
                 participant S3 as Amazon S3
                 
                 User->>Browser: 動画再生ボタンクリック
-                Browser->>S3: HTTP GET request<br/>/bucket/video.mp4
-                S3-->>Browser: HTTP 200 OK<br/>Content-Type: video/mp4<br/>動画データ
+                Browser->>S3: HTTP GET request /bucket/video.mp4
+                S3-->>Browser: HTTP 200 OK Content-Type: video/mp4
                 Browser->>Browser: 動画デコード
                 Browser->>User: 動画再生開始
           </pre>
