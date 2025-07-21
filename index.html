@@ -43,7 +43,7 @@
         font-size: 1.5em;
       }
       .reveal h3 {
-        font-size: 1em;
+        font-size: 0.8em;
       }
       .reveal .title-slide {
         text-align: center;
@@ -84,7 +84,11 @@
       .two-column pre code {
         width: 100%;
         padding-left: 2rem;
-        font-size: 0.8em;
+        font-size: 0.4em;
+      }
+      pre code {
+        padding-left: 2rem;
+        font-size: 0.6em;
       }
       .accent-color {
         color: #e55050 !important;
@@ -224,11 +228,30 @@ video.play();
           </p>
           <video width="800" height="450" controls>
             <source
-              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/loop-100-video.mp4"
+              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/video/mediaconvert/output.m3u8"
               type="video/mp4"
             />
             お使いのブラウザは動画タグをサポートしていません。
           </video>
+        </section>
+
+        <!-- 動画デモ -->
+        <section>
+          <h2>MP4の動画を再生だと困ること</h2>
+          <h3>解像度の種類が1つしか選択できない</h3>
+          <p>
+            =>
+            スマホで電波の悪いところで、高解像度のmp4を再生しようとすると全然再生できない🥺
+          </p>
+
+          <h3>ライブ配信がwebで見れない..</h3>
+          <p>
+            => ライブが終わってmp4をサーバーにアップロードするまで見れない🥺
+          </p>
+
+          <h3 class="fragment accent-color">
+            HTTP Live Streaming (HLS)を使うと解決できるよ！
+          </h3>
         </section>
 
         <!-- HLS特徴 -->
@@ -253,6 +276,32 @@ video.play();
             <li>セグメントを順次ダウンロード・再生</li>
             <li>ネットワーク状況に応じて品質を調整</li>
           </ol>
+        </section>
+
+        <!-- HLS仕組み -->
+        <section>
+          <h3>HLSを再生するにはどうしたらいい？？</h3>
+          <h3 class="fragment accent-color">
+            safariだとvideo tagでHLSの再生できるよ！
+          </h3>
+          <pre><code class="html">
+&lt;video controls&gt;
+&lt;source 
+  src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/video/mediaconvert/output.m3u8" 
+  type="application/x-mpegURL" /&gt;
+&lt;/video&gt;
+          </code></pre>
+
+          <video width="600" height="200" controls>
+            <source
+              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/video/mediaconvert/output.m3u8"
+              type="application/x-mpegURL"
+            />
+            お使いのブラウザは動画タグをサポートしていません。
+          </video>
+          <h3 class="fragment accent-color">
+            他のブラウザだとHLSの再生できない🥺
+          </h3>
         </section>
 
         <!-- まとめ -->
