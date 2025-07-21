@@ -73,6 +73,19 @@
       .reveal .slides section > * {
         margin-bottom: 15px;
       }
+      .two-column {
+        display: flex;
+        align-items: flex-start;
+        gap: 100px;
+      }
+      .two-column .column {
+        flex: 1;
+      }
+      .two-column pre code {
+        width: 100%;
+        padding-left: 2rem;
+        font-size: 0.8em;
+      }
     </style>
   </head>
   <body>
@@ -142,12 +155,68 @@ video.play();
 
         <!-- 動画デモ -->
         <section>
-          <h2>動画配信デモ</h2>
+          <h2>video tagですぐ実装できるやん</h2>
+          <div class="two-column">
+            <div class="column">
+              <pre><code class="html">
+&lt;video controls&gt;
+  &lt;source src="video.mp4" type="video/mp4"&gt;
+&lt;/video&gt;
+              </code></pre>
+              <ul>
+                <li>HTMLのvideo要素で簡単実装</li>
+                <li>ブラウザが自動で動画を処理</li>
+                <li>コントロールバーも自動表示</li>
+              </ul>
+            </div>
+            <div class="column">
+              <video width="100%" height="300" controls>
+                <source
+                  src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/199596-910653729_small.mp4"
+                  type="video/mp4"
+                />
+                お使いのブラウザは動画タグをサポートしていません。
+              </video>
+            </div>
+          </div>
+        </section>
+
+        <!-- 動画デモ -->
+        <section>
+          <h2>ブラウザごとにvideo tagの挙動異なる</h2>
+          <p>動画再生frameworkを使用して差分を吸収</p>
           <video width="800" height="450" controls>
-            <source src="video/mp4/199596-910653729_small.mp4" type="video/mp4">
+            <source
+              src="video/mp4/199596-910653729_small.mp4"
+              type="video/mp4"
+            />
             お使いのブラウザは動画タグをサポートしていません。
           </video>
-          <p>実際の動画ストリーミングの例</p>
+        </section>
+
+        <!-- データフロー図 -->
+        <section>
+          <h2>ブラウザがS3から動画を取得する流れ</h2>
+          <div class="mermaid">
+            sequenceDiagram participant User as ユーザー participant Browser as
+            ブラウザ participant S3 as Amazon S3 User->>Browser:
+            動画再生ボタンクリック Browser->>S3: HTTP GET request<br />/bucket/video.mp4
+            S3-->>Browser: HTTP 200 OK<br />Content-Type: video/mp4<br />動画データ
+            Browser->>Browser: 動画デコード Browser->>User: 動画再生開始
+          </div>
+        </section>
+
+        <!-- 動画デモ -->
+        <section>
+          <h2>動画配信デモ</h2>
+          <p>なんでクソでかい動画でもすぐに再生できるの？？</p>
+          <video width="800" height="450" controls>
+            <source
+              src="video/mp4/199596-910653729_small.mp4"
+              type="video/mp4"
+            />
+            お使いのブラウザは動画タグをサポートしていません。
+          </video>
         </section>
 
         <!-- HLS特徴 -->
@@ -197,12 +266,16 @@ video.play();
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/notes/notes.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
     <script>
       Reveal.initialize({
         hash: true,
         transition: "slide",
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
       });
+
+      // Initialize Mermaid
+      mermaid.initialize({ startOnLoad: true });
     </script>
   </body>
 </html>
