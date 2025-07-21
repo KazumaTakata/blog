@@ -19,6 +19,8 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/monokai.css"
     />
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/8.6.1/video-js.css" rel="stylesheet" />
     <style>
       .reveal {
         background-color: #ffffff;
@@ -92,6 +94,10 @@
       }
       .accent-color {
         color: #e55050 !important;
+      }
+      .vjs-default-skin {
+        width: 100%;
+        height: 50%;
       }
     </style>
   </head>
@@ -304,6 +310,19 @@ video.play();
           </h3>
         </section>
 
+        <!-- Video.js HLS Demo -->
+        <section>
+          <h3>Video.jsを使ってクロスブラウザでHLS再生</h3>
+
+          <video-js
+            id="videojs-hls-player"
+            class="vjs-default-skin"
+            controls
+            preload="auto"
+          >
+          </video-js>
+        </section>
+
         <!-- まとめ -->
         <section>
           <h2>まとめ</h2>
@@ -328,6 +347,8 @@ video.play();
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/markdown/markdown.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.3.1/plugin/highlight/highlight.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <!-- Video.js JavaScript -->
+    <script src="https://vjs.zencdn.net/8.6.1/video.min.js"></script>
     <script>
       Reveal.initialize({
         hash: true,
@@ -337,6 +358,23 @@ video.play();
 
       // Initialize Mermaid
       mermaid.initialize({ startOnLoad: true });
+
+      // Initialize Video.js player
+      Reveal.on("slidechanged", function (event) {
+        var player = videojs("videojs-hls-player", {
+          html5: {
+            vhs: {
+              withCredentials: true,
+            },
+          },
+        });
+
+        player.src({
+          src: "https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/video/mediaconvert/output.m3u8",
+          type: "application/x-mpegURL",
+          withCredentials: true,
+        });
+      });
     </script>
   </body>
 </html>
