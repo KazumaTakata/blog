@@ -107,7 +107,7 @@
         <!-- タイトルスライド -->
         <section class="title-slide">
           <h1>VOD配信・Live配信の裏側</h1>
-          <p>ストリーミング技術の基礎</p>
+          <p>7G5U たかた</p>
         </section>
 
         <!-- 概要 -->
@@ -116,8 +116,9 @@
           <ul>
             <li>VOD配信とは</li>
             <li>Live配信とは</li>
-            <li>内部で使用されているプロトコル</li>
             <li>Http Live Streaming (HLS)</li>
+            <li>ライブ配信とか</li>
+            <li>低遅延HLS配信とか</li>
           </ul>
         </section>
 
@@ -130,13 +131,6 @@
             <li>一時停止、早送り、巻き戻しが可能</li>
             <li>Netflix、YouTube、Amazon Prime Videoなど</li>
           </ul>
-          <pre><code class="javascript" data-line-numbers="1-5|2|3|4,5">
-// VOD配信の基本的な再生コード例
-const video = document.querySelector('video');
-video.src = 'https://example.com/video.mp4';
-video.load();
-video.play();
-          </code></pre>
         </section>
 
         <!-- Live配信 -->
@@ -159,11 +153,6 @@ video.play();
             <li>RTMP (Real-Time Messaging Protocol)</li>
             <li>WebRTC (Web Real-Time Communication)</li>
           </ul>
-        </section>
-
-        <!-- HLS詳細 -->
-        <section>
-          <h2>HTTP Live Streaming (HLS)</h2>
         </section>
 
         <!-- 動画デモ -->
@@ -200,7 +189,7 @@ video.play();
           <p>動画再生frameworkを使用して差分を吸収</p>
           <video width="800" height="450" controls>
             <source
-              src="video/mp4/199596-910653729_small.mp4"
+              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/loop-100-video.mp4"
               type="video/mp4"
             />
             お使いのブラウザは動画タグをサポートしていません。
@@ -234,7 +223,7 @@ video.play();
           </p>
           <video width="800" height="450" controls>
             <source
-              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/video/mediaconvert/output.m3u8"
+              src="https://video-playground-takata.s3.ap-southeast-2.amazonaws.com/loop-100-video.mp4"
               type="video/mp4"
             />
             お使いのブラウザは動画タグをサポートしていません。
@@ -392,7 +381,7 @@ video.play();
 
         <!-- Video.js HLS Demo -->
         <section>
-          <h3>Video.jsを使ってクロスブラウザでHLS再生</h3>
+          <h3>Video.jsを使ってライブ配信再生</h3>
 
           <video-js
             id="videojs-hls-live-player"
@@ -411,6 +400,30 @@ video.play();
             <li>WebRTCベースで1秒以下の遅延を実現</li>
             <li>インタラクティブな配信が可能</li>
           </ul>
+        </section>
+
+        <!-- IVS Low Latency Architecture -->
+        <section>
+          <h3>IVSを使用した低遅延ライブ配信の仕組み</h3>
+          <pre class="mermaid">
+            sequenceDiagram
+                participant Streamer as 配信者<br/>(OBS/Broadcasting Software)
+                participant IVS as Amazon IVS<br/>(低遅延エンコード)
+                participant Browser as ブラウザ<br/>(IVS Player)
+
+                Streamer->>IVS: RTMPS ライブストリーム
+                IVS->>IVS: 超低遅延エンコード・HLSセグメント化
+                
+                loop 低遅延HLS配信 (1秒以下)
+                    Browser->>IVS: GET /playlist.m3u8
+                    IVS-->>Browser: 低遅延マニフェスト (短いセグメント)
+                    Browser->>IVS: GET /segment.ts
+                    IVS-->>Browser: 超短HLSセグメント (200ms単位)
+                    Browser->>Browser: 即座に再生開始
+                end
+                
+                Note over IVS,Browser: 従来HLS: 6-10秒セグメント<br/>IVS: 200ms超短セグメント
+          </pre>
         </section>
 
         <!-- IVS Player Demo -->
@@ -441,8 +454,7 @@ video.play();
 
         <!-- ありがとうございました -->
         <section class="title-slide">
-          <h1>ありがとうございました</h1>
-          <p>質問はありますか？</p>
+          <h1>終わり</h1>
         </section>
       </div>
     </div>
