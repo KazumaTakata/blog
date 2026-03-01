@@ -2,6 +2,7 @@ import typography from '@tailwindcss/typography';
 
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
@@ -31,22 +32,22 @@ export default {
       typography: {
         DEFAULT: {
           css: {
-            '--tw-prose-body': '#d9d9e3',
-            '--tw-prose-headings': '#ffffff',
-            '--tw-prose-lead': '#c5c5d2',
-            '--tw-prose-links': '#6ee7b7',
-            '--tw-prose-bold': '#ffffff',
-            '--tw-prose-counters': '#8e8ea0',
-            '--tw-prose-bullets': '#6e6e80',
-            '--tw-prose-hr': '#2d2d3a',
-            '--tw-prose-quotes': '#c5c5d2',
-            '--tw-prose-quote-borders': '#6ee7b7',
-            '--tw-prose-captions': '#8e8ea0',
-            '--tw-prose-code': '#6ee7b7',
-            '--tw-prose-pre-code': '#d9d9e3',
-            '--tw-prose-pre-bg': '#1a1a2e',
-            '--tw-prose-th-borders': '#4a4a5a',
-            '--tw-prose-td-borders': '#2d2d3a',
+            '--tw-prose-body': '#1a1a2e',
+            '--tw-prose-headings': '#0d0d1a',
+            '--tw-prose-lead': '#2d2d3a',
+            '--tw-prose-links': '#059669',
+            '--tw-prose-bold': '#0d0d1a',
+            '--tw-prose-counters': '#2d2d3a',
+            '--tw-prose-bullets': '#4a4a5a',
+            '--tw-prose-hr': '#d9d9e3',
+            '--tw-prose-quotes': '#1a1a2e',
+            '--tw-prose-quote-borders': '#059669',
+            '--tw-prose-captions': '#2d2d3a',
+            '--tw-prose-code': '#059669',
+            '--tw-prose-pre-code': '#1a1a2e',
+            '--tw-prose-pre-bg': '#f7f7f8',
+            '--tw-prose-th-borders': '#c5c5d2',
+            '--tw-prose-td-borders': '#d9d9e3',
             'h1': {
               fontWeight: '700',
               letterSpacing: '-0.025em',
@@ -72,11 +73,11 @@ export default {
               borderBottom: '1px solid transparent',
               transition: 'border-color 0.2s',
               '&:hover': {
-                borderBottomColor: '#6ee7b7',
+                borderBottomColor: '#059669',
               },
             },
             'code': {
-              backgroundColor: '#2d2d3a',
+              backgroundColor: '#ececf1',
               padding: '0.25rem 0.4rem',
               borderRadius: '0.25rem',
               fontWeight: '400',
@@ -88,14 +89,14 @@ export default {
               content: '""',
             },
             'pre': {
-              backgroundColor: '#1a1a2e',
-              border: '1px solid #2d2d3a',
+              backgroundColor: '#ececf1',
+              border: '1px solid #d9d9e3',
               borderRadius: '0.5rem',
             },
             'blockquote': {
               fontStyle: 'normal',
               borderLeftWidth: '3px',
-              borderLeftColor: '#6ee7b7',
+              borderLeftColor: '#10b981',
               paddingLeft: '1.5em',
             },
             'ul': {
@@ -107,6 +108,36 @@ export default {
             'li': {
               marginTop: '0.5em',
               marginBottom: '0.5em',
+            },
+          },
+        },
+        invert: {
+          css: {
+            '--tw-prose-body': '#d9d9e3',
+            '--tw-prose-headings': '#ffffff',
+            '--tw-prose-lead': '#c5c5d2',
+            '--tw-prose-links': '#6ee7b7',
+            '--tw-prose-bold': '#ffffff',
+            '--tw-prose-counters': '#8e8ea0',
+            '--tw-prose-bullets': '#6e6e80',
+            '--tw-prose-hr': '#2d2d3a',
+            '--tw-prose-quotes': '#c5c5d2',
+            '--tw-prose-quote-borders': '#6ee7b7',
+            '--tw-prose-captions': '#8e8ea0',
+            '--tw-prose-code': '#6ee7b7',
+            '--tw-prose-pre-code': '#d9d9e3',
+            '--tw-prose-pre-bg': '#1a1a2e',
+            '--tw-prose-th-borders': '#4a4a5a',
+            '--tw-prose-td-borders': '#2d2d3a',
+            'code': {
+              backgroundColor: '#2d2d3a',
+            },
+            'pre': {
+              backgroundColor: '#1a1a2e',
+              border: '1px solid #2d2d3a',
+            },
+            'a:hover': {
+              borderBottomColor: '#6ee7b7',
             },
           },
         },

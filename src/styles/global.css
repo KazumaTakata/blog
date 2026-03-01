@@ -6,29 +6,35 @@
 
 @layer base {
   body {
-    @apply bg-dark-950 text-dark-100 font-sans antialiased;
+    @apply bg-white text-dark-900 font-sans antialiased;
+    @apply dark:bg-dark-950 dark:text-dark-100;
   }
 
   ::selection {
-    @apply bg-accent-500/30 text-white;
+    @apply bg-accent-500/30 text-dark-950;
+    @apply dark:text-white;
   }
 
   h1, h2, h3, h4 {
-    @apply text-white font-semibold tracking-tight;
+    @apply text-dark-950 font-semibold tracking-tight;
+    @apply dark:text-white;
   }
 }
 
 @layer components {
   .gradient-text {
-    @apply bg-gradient-to-r from-accent-400 via-emerald-300 to-teal-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-accent-600 via-emerald-500 to-teal-500 bg-clip-text text-transparent;
+    @apply dark:from-accent-400 dark:via-emerald-300 dark:to-teal-400;
   }
 
   .gradient-border {
-    @apply border border-dark-700/50 hover:border-accent-500/30 transition-colors duration-300;
+    @apply border border-dark-200 hover:border-accent-500/50 transition-colors duration-300;
+    @apply dark:border-dark-700/50 dark:hover:border-accent-500/30;
   }
 
   .card {
-    @apply bg-dark-900/50 backdrop-blur-sm rounded-2xl p-6 gradient-border;
+    @apply bg-dark-50 backdrop-blur-sm rounded-2xl p-6 gradient-border;
+    @apply dark:bg-dark-900/50;
   }
 
   .fade-in {

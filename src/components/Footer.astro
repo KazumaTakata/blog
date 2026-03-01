@@ -2,9 +2,9 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="border-t border-dark-800/50 mt-24">
+<footer class="border-t border-dark-200/50 dark:border-dark-800/50 mt-24">
   <div
-    class="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-dark-500"
+    class="max-w-5xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-dark-700 dark:text-dark-500"
   >
     <p>&copy; {year} K.Takata. All rights reserved.</p>
     <div class="flex gap-6">
@@ -12,7 +12,7 @@ const year = new Date().getFullYear();
         href="https://github.com/KazumaTakata/"
         target="_blank"
         rel="noopener noreferrer"
-        class="hover:text-white transition-colors"
+        class="hover:text-dark-950 dark:hover:text-white transition-colors"
       >
         GitHub
       </a>

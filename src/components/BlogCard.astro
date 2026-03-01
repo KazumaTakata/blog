@@ -17,9 +17,9 @@ const formattedDate = date.toLocaleDateString('ja-JP', {
 ---
 
 <a href={`${base}/posts/${slug}`} class="block card group">
-  <time class="text-xs text-dark-500 uppercase tracking-wider">{formattedDate}</time>
-  <h3 class="mt-2 text-lg font-semibold text-white group-hover:text-accent-400 transition-colors duration-200">
+  <time class="text-xs text-dark-700 dark:text-dark-500 uppercase tracking-wider">{formattedDate}</time>
+  <h3 class="mt-2 text-lg font-semibold text-dark-950 dark:text-white group-hover:text-accent-600 dark:group-hover:text-accent-400 transition-colors duration-200">
     {title}
   </h3>
-  <p class="mt-2 text-sm text-dark-400 leading-relaxed line-clamp-2">{description}</p>
+  <p class="mt-2 text-sm text-dark-800 dark:text-dark-400 leading-relaxed line-clamp-2">{description}</p>
 </a>
