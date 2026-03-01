@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { getCollection } from 'astro:content';
+
+const allWorks = (await getCollection('works')).sort(
+  (a, b) => (a.data.order ?? 99) - (b.data.order ?? 99)
+);
+---
+
+<BaseLayout title="Works - K.Takata">
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <SectionHeading title="Works" subtitle="プロジェクト一覧" />
+    <div class="grid gap-6 md:grid-cols-2">
+      {allWorks.map((work) => (
+        <WorkCard
+          title={work.data.title}
+          description={work.data.description}
+          tags={work.data.tags}
+          url={work.data.url}
+          github={work.data.github}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

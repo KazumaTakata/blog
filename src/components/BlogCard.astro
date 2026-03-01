@@ -1,0 +1,24 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  slug: string;
+}
+
+const { title, description, date, slug } = Astro.props;
+
+const formattedDate = date.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<a href={`/blog/${slug}`} class="block card group">
+  <time class="text-xs text-dark-500 uppercase tracking-wider">{formattedDate}</time>
+  <h3 class="mt-2 text-lg font-semibold text-white group-hover:text-accent-400 transition-colors duration-200">
+    {title}
+  </h3>
+  <p class="mt-2 text-sm text-dark-400 leading-relaxed line-clamp-2">{description}</p>
+</a>
