@@ -29,7 +29,7 @@ const recentPosts = allPosts.slice(0, 3);
         ))}
       </div>
       <div class="mt-8 text-center">
-        <a href="/blog" class="text-sm text-dark-400 hover:text-accent-400 transition-colors">
+        <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/posts`} class="text-sm text-dark-400 hover:text-accent-400 transition-colors">
           All Posts &rarr;
         </a>
       </div>
