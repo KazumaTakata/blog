@@ -1,0 +1,66 @@
+---
+interface Props {
+  date: Date;
+  tag: string;
+  minutes: number;
+  title: string;
+  summary: string;
+  href: string;
+}
+
+const { date, tag, minutes, title, summary, href } = Astro.props;
+const isoDate = date.toISOString().slice(0, 10);
+---
+
+<a href={href} class="man-row post-row">
+  <div class="col-date">{isoDate}</div>
+  <div class="col-tag"><span class="tag">{tag}</span></div>
+  <div class="col-min">{minutes}m</div>
+  <div class="col-title">
+    <div class="row-title">{title}</div>
+    <div class="row-summary">{summary}</div>
+  </div>
+</a>
+
+<style>
+  .col-date {
+    width: 110px;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+  .col-tag {
+    width: 90px;
+    flex-shrink: 0;
+  }
+  .col-min {
+    width: 50px;
+    color: var(--dim);
+    flex-shrink: 0;
+  }
+  .col-title {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 640px) {
+    .post-row {
+      flex-wrap: wrap;
+      gap: 6px 10px;
+    }
+    .col-date { width: auto; }
+    .col-tag { width: auto; }
+    .col-min { width: auto; }
+    .col-title {
+      flex: 0 0 100%;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 4px;
+    }
+    .row-title,
+    .row-summary {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+</style>
