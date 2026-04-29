@@ -1,138 +1,138 @@
 ---
+interface Props {
+  slug?: string;
+}
+
+const { slug } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+
 const navItems = [
-  { label: "Blog", href: `${base}/posts` },
-  { label: "About", href: `${base}/about` },
+  { label: 'index', href: `${base}` || '/' },
+  { label: 'writing', href: `${base}/posts` },
+  { label: 'about', href: `${base}/about` },
 ];
 
-const currentPath = Astro.url.pathname;
+const center = (slug ?? '個人サイト').toUpperCase();
 ---
 
-<header
-  class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-dark-950/80 backdrop-blur-md border-b border-dark-200/50 dark:border-dark-800/50"
->
-  <nav class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a
-      href={`${base}/`}
-      class="text-lg font-semibold text-dark-900 dark:text-white hover:text-accent-500 dark:hover:text-accent-400 transition-colors"
-    >
-      K.Takata
-    </a>
-
-    <!-- Desktop nav -->
-    <ul class="hidden md:flex items-center gap-8">
-      {
-        navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class:list={[
-                "text-sm transition-colors duration-200",
-                currentPath.startsWith(item.href)
-                  ? "text-dark-900 dark:text-white"
-                  : "text-dark-500 dark:text-dark-400 hover:text-dark-900 dark:hover:text-white",
-              ]}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-      <!-- Theme toggle button -->
-      <li>
-        <button
-          id="theme-toggle"
-          class="p-2 text-dark-500 dark:text-dark-400 hover:text-dark-900 dark:hover:text-white transition-colors"
-          aria-label="Toggle theme"
-        >
-          <!-- Sun icon (shown in dark mode) -->
-          <svg id="sun-icon" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <!-- Moon icon (shown in light mode) -->
-          <svg id="moon-icon" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-        </button>
-      </li>
-    </ul>
-
-    <div class="flex items-center gap-2 md:hidden">
-      <!-- Mobile theme toggle -->
-      <button
-        id="theme-toggle-mobile"
-        class="p-2 text-dark-500 dark:text-dark-400 hover:text-dark-900 dark:hover:text-white transition-colors"
-        aria-label="Toggle theme"
-      >
-        <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-      </button>
-      <!-- Mobile menu button -->
-      <button
-        id="menu-toggle"
-        class="text-dark-500 dark:text-dark-400 hover:text-dark-900 dark:hover:text-white transition-colors"
-        aria-label="Toggle menu"
-      >
-        <svg
-          class="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            id="menu-icon"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="1.5"
-            d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Mobile menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden border-t border-dark-200/50 dark:border-dark-800/50 bg-white/95 dark:bg-dark-950/95 backdrop-blur-md"
-  >
-    <ul class="px-6 py-4 space-y-3">
-      {
-        navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class:list={[
-                "block text-sm py-1 transition-colors",
-                currentPath.startsWith(item.href)
-                  ? "text-dark-900 dark:text-white"
-                  : "text-dark-500 dark:text-dark-400 hover:text-dark-900 dark:hover:text-white",
-              ]}
-            >
-              {item.label}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
+<header role="banner">
+  <div class="strip">
+    <span class="strip-left">KTAKATA(1)</span>
+    <span class="strip-center" aria-hidden="true">{center}</span>
+    <span class="strip-actions">
+      <button id="theme-toggle" type="button" aria-label="ライト・ダークテーマを切り替え">[ THEME ]</button>
+    </span>
   </div>
+
+  <nav class="nav" aria-label="サイトナビゲーション">
+    {
+      navItems.map((item, i) => {
+        const itemPath = item.href.replace(/\/$/, '');
+        const isActive =
+          item.label === 'index'
+            ? currentPath === itemPath || currentPath === ''
+            : currentPath.startsWith(itemPath) && itemPath !== '';
+        return (
+          <>
+            {i > 0 && <span class="nav-sep" aria-hidden="true">·</span>}
+            <a
+              href={item.href}
+              class:list={['nav-link', { active: isActive }]}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </>
+        );
+      })
+    }
+  </nav>
 </header>
 
-<div class="h-16"></div>
+<style>
+  .strip-left {
+    flex-shrink: 0;
+  }
+
+  .strip-center {
+    text-align: center;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .strip-actions {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 640px) {
+    .strip-center {
+      display: none;
+    }
+  }
+
+  .strip-actions button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+    cursor: pointer;
+    padding: 6px 4px;
+    min-height: 32px;
+  }
+
+  .strip-actions button:hover {
+    color: var(--fg);
+  }
+
+  .nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: baseline;
+    margin-bottom: 36px;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      margin-bottom: 24px;
+      letter-spacing: 0.12em;
+    }
+  }
+
+  .nav-link {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding: 6px 2px 5px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .nav-link:hover {
+    color: var(--fg);
+  }
+
+  .nav-link.active {
+    color: var(--fg);
+    border-bottom-color: var(--fg);
+  }
+
+  .nav-sep {
+    opacity: 0.5;
+  }
+</style>
 
 <script is:inline>
-  (function() {
-    const toggle = document.getElementById("menu-toggle");
-    const menu = document.getElementById("mobile-menu");
-
-    toggle?.addEventListener("click", () => {
-      menu?.classList.toggle("hidden");
-    });
-
-    // Theme toggle
+  (function () {
     function setTheme(dark) {
       if (dark) {
         document.documentElement.classList.add('dark');
@@ -142,13 +142,9 @@ const currentPath = Astro.url.pathname;
         localStorage.setItem('theme', 'light');
       }
     }
-
-    function toggleTheme() {
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
       const isDark = document.documentElement.classList.contains('dark');
       setTheme(!isDark);
-    }
-
-    document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-    document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+    });
   })();
 </script>

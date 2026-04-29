@@ -1,26 +1,51 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import BlogCard from '../../components/BlogCard.astro';
-import SectionHeading from '../../components/SectionHeading.astro';
+import Section from '../../components/Section.astro';
+import PostRow from '../../components/PostRow.astro';
 import { getCollection } from 'astro:content';
+import { readingMinutes, primaryTag } from '../../lib/post.ts';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const allPosts = (await getCollection('blog')).sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
+
+// Group by year for archive feel
+const groups = new Map<number, typeof allPosts>();
+for (const p of allPosts) {
+  const y = p.data.date.getFullYear();
+  if (!groups.has(y)) groups.set(y, []);
+  groups.get(y)!.push(p);
+}
+const years = [...groups.keys()].sort((a, b) => b - a);
 ---
 
-<BaseLayout title="Blog - K.Takata">
-  <section class="max-w-5xl mx-auto px-6 py-16">
-    <SectionHeading title="Blog" subtitle="記事一覧" />
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {allPosts.map((post) => (
-        <BlogCard
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.date}
-          slug={post.id}
-        />
-      ))}
-    </div>
-  </section>
+<BaseLayout title="K.Takata — writing" slug="writing">
+  <Section title="NAME">
+    <div>writing — 技術的な走り書き ({allPosts.length} entries)</div>
+  </Section>
+
+  {
+    years.map((year) => (
+      <Section title={`${year}`}>
+        <div class="table-head">
+          <span style="width:110px">DATE</span>
+          <span style="width:90px">TAG</span>
+          <span style="width:50px">MIN</span>
+          <span style="flex:1">TITLE</span>
+        </div>
+        {groups.get(year)!.map((post) => (
+          <PostRow
+            date={post.data.date}
+            tag={primaryTag(post.data.tags)}
+            minutes={readingMinutes(post.body)}
+            title={post.data.title}
+            summary={post.data.description}
+            href={`${base}/posts/${post.id}`}
+          />
+        ))}
+      </Section>
+    ))
+  }
 </BaseLayout>
