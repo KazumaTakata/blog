@@ -17,13 +17,13 @@
 }
 
 :root.dark {
-  --bg: #101012;
+  --bg: #1f1f22;
   --fg: #e6e6e0;
   --dim: rgba(230, 230, 224, 0.72);
   --dim-strong: rgba(230, 230, 224, 0.88);
-  --rule: rgba(230, 230, 224, 0.24);
+  --rule: rgba(230, 230, 224, 0.22);
   --subtle: rgba(230, 230, 224, 0.06);
-  --code-bg: #0a0a0c;
+  --code-bg: #16161a;
   --tag-border: rgba(230, 230, 224, 0.45);
   --accent: #aac6ff;
 }
