@@ -13,7 +13,7 @@ const navItems = [
   { label: 'about', href: `${base}/about` },
 ];
 
-const center = (slug ?? '個人サイト').toUpperCase();
+const center = slug ? slug.toUpperCase() : '';
 ---
 
 <header role="banner">
