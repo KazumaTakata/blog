@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standalone Page</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    .card {
+      text-align: center;
+      padding: 3rem 2.5rem;
+      border-radius: 1rem;
+      background: #1e293b;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      max-width: 32rem;
+    }
+    h1 { margin: 0 0 0.75rem; font-size: 2rem; }
+    p { margin: 0.25rem 0; line-height: 1.6; color: #94a3b8; }
+    code {
+      background: #0f172a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.3rem;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>独立した HTML ページ</h1>
+    <p>このページは Astro の処理を受けない、素の HTML です。</p>
+    <p><code>public/standalone.html</code> に置かれています。</p>
+    <p>中身は自由に書き換えてください。</p>
+  </main>
+</body>
+</html>
